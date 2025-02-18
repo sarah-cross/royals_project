@@ -1,0 +1,19 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore database
+db.sqlite3
+
+# Ignore Django secret key and environment files
+.env
+
+# Ignore migrations (optional, but useful)
+*/migrations/*.py
+!*/migrations/__init__.py
+
