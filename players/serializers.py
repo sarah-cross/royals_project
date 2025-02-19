@@ -3,21 +3,14 @@ from .models import Player, BattingStats, PitchingStats
 
 
 class PlayerSerializer(serializers.ModelSerializer): 
-    batting_stats = serializers.SerializerMethodField()
-    pitching_stats = serializers.SerializerMethodField()
-
     class Meta: 
         model = Player
-        fields = "__all__"
-
-    def get_batting_stats(self, obj):
-        return BattingStatsSerializer(obj.batting_stats.all(), many=True).data
-
-    def get_pitching_stats(self, obj):
-        return PitchingStatsSerializer(obj.pitching_stats.all(), many=True).data
+        fields = ['name_first', 'name_last']
 
 
 class BattingStatsSerializer(serializers.ModelSerializer): 
+    player = PlayerSerializer(read_only=True)
+
     avg = serializers.SerializerMethodField()
     slg = serializers.SerializerMethodField()
 
@@ -36,6 +29,8 @@ class BattingStatsSerializer(serializers.ModelSerializer):
 
 
 class PitchingStatsSerializer(serializers.ModelSerializer): 
+    player = PlayerSerializer(read_only=True)
+    
     whip = serializers.SerializerMethodField()
     avg = serializers.SerializerMethodField()
 
@@ -50,3 +45,6 @@ class PitchingStatsSerializer(serializers.ModelSerializer):
     # Calculate avg
     def get_avg(self, obj):
         return round(obj.hits / obj.at_bats, 3) if obj.at_bats > 0 else 0.000
+
+
+# will create Player Profile Serializer with more of player info

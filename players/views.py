@@ -27,7 +27,13 @@ class PitchingStatsViewSet(viewsets.ModelViewSet):
 # Custom view for batting leaderboard
 @api_view(["GET"])
 def batting_leaderboard(request):
-    queryset = BattingStats.objects.select_related('player').all()
+    year = request.GET.get('year')
+    queryset = BattingStats.objects.select_related('player')
+
+    # filter by year
+    if year: 
+        queryset = queryset.filter(year=year)
+
     serializer = BattingStatsSerializer(queryset, many=True)
 
     # sort by highest batting average
@@ -39,10 +45,16 @@ def batting_leaderboard(request):
 # Custom view for pitching leaderboard
 @api_view(["GET"])
 def pitching_leaderboard(request): 
-    queryset = PitchingStats.objects.select_related('player').all()
+    year = request.GET.get('year')
+    queryset = PitchingStats.objects.select_related('player')
+
+    # filter by year
+    if year: 
+        queryset = queryset.filter(year=year)
+
     serializer = PitchingStatsSerializer(queryset, many=True)
 
     # sort by lowest whip
     sorted_data = sorted(serializer.data, key=lambda x: x["whip"])
-    
-    return Response(serializer.data)
+
+    return Response(sorted_data)
