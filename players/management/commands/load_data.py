@@ -38,10 +38,12 @@ class Command(BaseCommand):
                 BattingStats.objects.create(
                     player=player,
                     year=stat["year"], 
+                    league=stat["league"], 
                     org_abbreviation=stat["org_abbreviation"],
                     plate_appearances=stat["plate_appearances"], 
                     at_bats=stat["at_bats"], 
-                    games=stat["games"], 
+                    games=stat["games"],
+                    games_started=stat["games_started"], 
                     runs=stat["runs"], 
                     hits=stat["hits"], 
                     doubles=stat["doubles"], 
