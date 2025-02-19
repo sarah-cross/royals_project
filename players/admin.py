@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Player, BattingStats, PitchingStats
 
-# Register your models here.
+admin.site.register(Player)
+admin.site.register(BattingStats)
+admin.site.register(PitchingStats)
+
