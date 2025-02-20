@@ -36,10 +36,7 @@ def batting_leaderboard(request):
 
     serializer = BattingStatsSerializer(queryset, many=True)
 
-    # sort by highest batting average
-    sorted_data = sorted(serializer.data, key=lambda x: x["avg"], reverse=True)
-
-    return Response(sorted_data)
+    return Response(serializer.data)
 
 
 # Custom view for pitching leaderboard
@@ -54,7 +51,4 @@ def pitching_leaderboard(request):
 
     serializer = PitchingStatsSerializer(queryset, many=True)
 
-    # sort by lowest whip
-    sorted_data = sorted(serializer.data, key=lambda x: x["whip"])
-
-    return Response(sorted_data)
+    return Response(serializer.data)
