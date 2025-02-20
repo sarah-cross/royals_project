@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BattingLeaderboardComponent } from './batting-leaderboard.component';
+import { BattingLeaderboardComponent } from './leaderboard.component';
 
 describe('BattingLeaderboardComponent', () => {
   let component: BattingLeaderboardComponent;

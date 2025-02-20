@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { BattingLeaderboardComponent } from './components/batting-leaderboard/batting-leaderboard.component';
-import { PitchingLeaderboardComponent } from './components/pitching-leaderboard/pitching-leaderboard.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+
 
 
 export const routes: Routes = [
-    { path: 'batting-leaderboard', component: BattingLeaderboardComponent }, 
-    { path: 'pitching-leaderboard', component: PitchingLeaderboardComponent }, 
-    { path: '', redirectTo: '/batting-leaderboard', pathMatch: 'full'}
+    { path: 'leaderboard', component: LeaderboardComponent }, 
+    { path: '', redirectTo: '/leaderboard', pathMatch: 'full'}
 ];
