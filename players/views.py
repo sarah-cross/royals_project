@@ -2,14 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from .models import Player, BattingStats, PitchingStats
-from .serializers import PlayerSerializer, BattingStatsSerializer, PitchingStatsSerializer
-
-
-class PlayerViewSet(viewsets.ModelViewSet):
-    # Prefectch to batch fetch related stats
-    queryset = Player.objects.prefetch_related('batting_stats', 'pitching_stats').all()
-    serializer_class = PlayerSerializer
+from .serializers import PlayerSerializer, BattingStatsSerializer, PitchingStatsSerializer, PlayerStatsSerializer
 
 
 class BattingStatsViewSet(viewsets.ModelViewSet):
@@ -50,5 +45,14 @@ def pitching_leaderboard(request):
         queryset = queryset.filter(year=year)
 
     serializer = PitchingStatsSerializer(queryset, many=True)
+
+    return Response(serializer.data)
+
+
+# Get all stats for a player by ID
+@api_view(["GET"])
+def get_player(request, player_id):
+    player = get_object_or_404(Player, id=player_id)
+    serializer = PlayerStatsSerializer(player)
 
     return Response(serializer.data)

@@ -1,0 +1,25 @@
+.header {
+    padding: 30px;
+    padding-left: 40px;
+    background-color: #004687;
+    color: white;
+  }
+
+  .player-card {
+    padding: 12px;
+    max-width: 300px;
+    border-radius: 8px;
+    margin: 30px;
+  }
+
+
+  mat-divider {
+    width: 100%;
+    margin: 8px 0;
+  }
+  
+  .card-content {
+    padding: 2px 0;
+    font-size: 16px;
+  }
+  

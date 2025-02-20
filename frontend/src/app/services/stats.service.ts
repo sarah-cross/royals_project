@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LeaderboardService {
+export class StatsService {
   private base_url = 'http://127.0.0.1:8000/api';
 
   constructor(private http: HttpClient) { } // inject http in constructor to make api calls
@@ -21,6 +21,12 @@ export class LeaderboardService {
   getPitchingLeaderboard(year?: number): Observable<any[]> {
     let url = `${this.base_url}/pitching-leaderboard/`;
     if (year) url += `?year=${year}`;
+    return this.http.get<any[]>(url);
+  }
+
+  // get all stats associated with a player
+  getPlayerDetails(playerId: number): Observable<any[]> {
+    let url = `${this.base_url}/player/${playerId}/`;
     return this.http.get<any[]>(url);
   }
 }

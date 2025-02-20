@@ -34,8 +34,10 @@
 
                 <!--Player column-->
                 <ng-container matColumnDef="player">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Player</th>
-                    <td mat-cell *matCellDef="let player">{{ player.player.name_use }} {{ player.player.name_last }}</td>
+                    <th mat-header-cell *matHeaderCellDef>Player</th>
+                    <td mat-cell *matCellDef="let player">
+                        <a [routerLink]="['/player', player.player.id]">{{ player.player.name_use }} {{ player.player.name_last }}</a>
+                    </td>
                 </ng-container>
 
                 <!--Team column-->
@@ -140,8 +142,10 @@
 
                 <!--Player column-->
                 <ng-container matColumnDef="player">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Player</th>
-                    <td mat-cell *matCellDef="let player">{{ player.player.name_use }} {{ player.player.name_last }}</td>
+                    <th mat-header-cell *matHeaderCellDef>Player</th>
+                    <td mat-cell *matCellDef="let player">
+                        <a [routerLink]="['/player', player.player.id]">{{ player.player.name_use }} {{ player.player.name_last }}</a>
+                    </td>
                 </ng-container>
 
                 <!--Team column-->

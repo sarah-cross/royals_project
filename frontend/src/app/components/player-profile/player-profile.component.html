@@ -1,0 +1,17 @@
+<h1 class="header">MLB Statistics</h1>
+
+<mat-card class="player-card">
+    <mat-card-header>
+        <mat-card-title class="card-title">{{ player.name_use }} {{ player.name_last }}</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="card-content">Team: {{ player.team }}</div>
+        <div class="card-content">Height: {{ player.height_feet }}'{{ player.height_inches }}"</div>
+        <div class="card-content"> Weight: {{ player.weight }} lbs</div>
+        <div class="card-content"> Birthdate: {{ player.birth_date }}</div>
+        <div class="card-content">Position: {{ player.primary_position }}</div>
+        <div class="card-content">Bats: {{ player.bats }}</div>
+        <div class="card-content">Throws: {{ player.throws }}</div>
+    </mat-card-content> 
+</mat-card>

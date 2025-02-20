@@ -1,5 +1,5 @@
 import { OnInit, AfterViewInit, Component, ViewChild } from '@angular/core';
-import { LeaderboardService } from '../../services/leaderboard.service';
+import { StatsService } from '../../services/stats.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { NgFor, NgIf } from '@angular/common';
@@ -7,7 +7,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatButtonToggleModule,
     NgFor,
     NgIf,
+    RouterModule,
   ],
   templateUrl: './leaderboard.component.html',
   styleUrl: './leaderboard.component.css'
@@ -32,11 +34,11 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
   
   battingColumns: string[] = ['rank','player', 'org_abbreviation', 'league', 'games', 'at_bats', 'runs', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'stolen_bases', 'caught_stealing', 'avg', 'slg']; 
   pitchingColumns: string[] = ['rank','player', 'org_abbreviation', 'league', 'games', 'games_started', 'complete_games', 'games_finished', 'innings_pitched', 'wins', 'losses', 'saves', 'total_batters_faced', 'at_bats', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'whip', 'avg'];
-  displayedColumns: string[] = this.battingColumns; // default display batting stats
+  displayedColumns: string[] = this.battingColumns; // default display batting columns
 
   years = [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2001, 2000];
   selectedYear = 2024;  // default year
-  selectedStatType: string = 'batting';
+  selectedStatType: string = 'batting'; // default stat type
 
   dataSource = new MatTableDataSource<any>([]);
   
@@ -44,7 +46,7 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private leaderboardService: LeaderboardService) {}
+  constructor(private statsService: StatsService) {}
 
   ngOnInit() {
     this.loadLeaderboard();
@@ -83,18 +85,23 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
   }
   
   loadLeaderboard(year?: number): void {
-    console.log('selected stat type:', this.selectedStatType);
-    console.log('selected year:', this.selectedYear);
+    // get batting leaderboard data
     if (this.selectedStatType === 'batting') {
-      this.leaderboardService.getBattingLeaderboard(this.selectedYear).subscribe(data => {
+      this.statsService.getBattingLeaderboard(this.selectedYear).subscribe(data => {
         this.dataSource.data = data;
         
       });
     }
+    // get pitching leaderboard data
     else if (this.selectedStatType === 'pitching') {
-      this.leaderboardService.getPitchingLeaderboard(this.selectedYear).subscribe(data => {
+      this.statsService.getPitchingLeaderboard(this.selectedYear).subscribe(data => {
         this.dataSource.data = data;
       });
     }
+  }
+
+  onPlayerClick(player: any) {
+    console.log('player clicked:', player);
+    // add logic to get player profile data 
   }
 }

@@ -5,7 +5,7 @@ from .models import Player, BattingStats, PitchingStats
 class PlayerSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Player
-        fields = ['name_use', 'name_last']
+        fields = ['id', 'name_use', 'name_last']
 
 
 class BattingStatsSerializer(serializers.ModelSerializer): 
@@ -47,4 +47,10 @@ class PitchingStatsSerializer(serializers.ModelSerializer):
         return round(obj.hits / obj.at_bats, 3) if obj.at_bats > 0 else 0.000
 
 
-# will create Player Profile Serializer with more of player info
+class PlayerStatsSerializer(serializers.ModelSerializer): 
+    batting_stats = BattingStatsSerializer(many=True, read_only=True) 
+    pitching_stats = PitchingStatsSerializer(many=True, read_only=True)
+
+    class Meta: 
+        model = Player
+        fields = "__all__"
