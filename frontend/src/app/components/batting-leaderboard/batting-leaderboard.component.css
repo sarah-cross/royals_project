@@ -1,0 +1,23 @@
+
+.leaderboard-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+}
+
+.table-container {
+  overflow-x: auto;
+
+}
+
+
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

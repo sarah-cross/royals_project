@@ -5,7 +5,7 @@ from .models import Player, BattingStats, PitchingStats
 class PlayerSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Player
-        fields = ['name_first', 'name_last']
+        fields = ['name_use', 'name_last']
 
 
 class BattingStatsSerializer(serializers.ModelSerializer): 

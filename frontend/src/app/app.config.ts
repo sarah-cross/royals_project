@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()), provideAnimationsAsync(),
-    importProvidersFrom(MatTableModule, MatSortModule, MatPaginatorModule)
+    importProvidersFrom(MatTableModule, MatSortModule, MatPaginatorModule, MatSelectModule)
   ]
 };
