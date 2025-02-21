@@ -58,6 +58,8 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       if (this.dataSource) {
         this.dataSource.sort = this.sort;
+        this.sort.active = "home_runs"; // default sort to home runs 
+        this.sort.direction = "desc";
         this.dataSource.paginator = this.paginator;
         console.log('Sort:', this.sort);
       }
@@ -102,8 +104,4 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onPlayerClick(player: any) {
-    console.log('player clicked:', player);
-    // add logic to get player profile data 
-  }
 }

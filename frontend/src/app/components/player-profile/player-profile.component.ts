@@ -1,36 +1,49 @@
 import { Component } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
-import { OnInit } from '@angular/core';
+import { OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { NgIf, NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+import { Router } from '@angular/router';
+import { Chart, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-player-profile',
+  standalone: true,
   imports: [
     MatCardModule,
     MatDividerModule,
     MatTableModule,
     MatToolbarModule,
     MatIcon,
+    MatMenuModule,
+    MatButtonModule,
     NgIf,
     NgFor,
+    RouterLink,
   ],
   templateUrl: './player-profile.component.html',
   styleUrl: './player-profile.component.css'
 })
-export class PlayerProfileComponent implements OnInit {
+export class PlayerProfileComponent implements OnInit, AfterViewInit {
   player: any;
   battingStats: any[] = [];
   pitchingStats: any[] = [];
   battingColumns: string[] = ['year', 'org_abbreviation', 'games', 'at_bats', 'runs', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'sacrifices', 'sacrifice_flies', 'stolen_bases', 'caught_stealing', 'avg', 'slg']; 
   pitchingColumns: string[] = ['year', 'org_abbreviation', 'games', 'games_started', 'complete_games', 'games_finished', 'innings_pitched', 'wins', 'losses', 'saves', 'total_batters_faced', 'at_bats', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'whip', 'avg'];
   
-  constructor(private route: ActivatedRoute, private statsService: StatsService) {}
+  battingYears: number[] = [];
+  battingAvgs: number[] = [];
+  sluggingPercentages: number[] = [];
+
+  constructor(private route: ActivatedRoute, private statsService: StatsService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -39,6 +52,11 @@ export class PlayerProfileComponent implements OnInit {
         this.loadPlayerData(playerId);
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+      Chart.register(...registerables); 
+      this.loadLineChart();
   }
 
   loadPlayerData(playerId: number): void {
@@ -55,12 +73,61 @@ export class PlayerProfileComponent implements OnInit {
         this.pitchingStats = this.player.pitching_stats;
         this.pitchingStats.sort((a, b) => b.year - a.year);
       }
-      
+
+      // debugging
       console.log('player data:', this.player);
       console.log('player batting stats:', this.battingStats);
       console.log('player pitching stats:', this.pitchingStats);
     });
     
+  }
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+
+  loadLineChart(): void {
+    // sort batting stats oldest to newest and set data
+    this.battingStats.sort((a, b) => a.year - b.year);
+    this.battingYears = this.battingStats.map(stat => stat.year);
+    this.battingAvgs = this.battingStats.map(stat => stat.avg);
+    this.sluggingPercentages = this.battingStats.map(stat => stat.slg);
+
+    // debugging
+    console.log('batting stats years:', this.battingYears);      
+    console.log('batting averages:', this.battingAvgs);  
+    console.log('slugging percentages:', this.sluggingPercentages);  
+
+    new Chart("lineChart", {
+      type: 'line', 
+      data: {
+        labels: this.battingYears, 
+        datasets: [
+          {
+            label: 'Batting Average', 
+            data: this.battingAvgs,
+            borderColor: 'blue', 
+            borderWidth: 2, 
+            fill: false
+          }, 
+          {
+            label: 'Slugging Percentage', 
+            data: this.sluggingPercentages,
+            borderColor: 'red', 
+            borderWidth: 2, 
+            fill: false
+          }
+        ]
+      }, 
+      options: {
+        responsive: true, 
+        scales: {
+          y: {
+            beginAtZero: false,
+            type: 'linear'
+          }
+        }
+      }
+    })
   }
 
 }

@@ -1,6 +1,6 @@
 
 <mat-toolbar class="toolbar">
-    <h1 class="header">MLB Statistics</h1>
+    <h1 class="header">Leaderboard</h1>
 </mat-toolbar>
 <div class="leaderboard-container">
     <div class="controls">
@@ -110,7 +110,7 @@
 
                  <!--Sacrifices column-->
                  <ng-container matColumnDef="sacrifices">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>S</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SAC</th>
                     <td mat-cell *matCellDef="let player">{{ player.sacrifices }}</td>
                 </ng-container>
 
@@ -224,7 +224,7 @@
 
                 <!--Total batters faced column-->
                 <ng-container matColumnDef="total_batters_faced">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Batters</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>TBF</th>
                     <td mat-cell *matCellDef="let player">{{ player.total_batters_faced }}</td>
                 </ng-container>
 

@@ -1,6 +1,12 @@
+
 <mat-toolbar class="toolbar">
-    <h1 class="header">MLB Statistics</h1>
+    <h1 class="header">Player Profile</h1>
 </mat-toolbar>
+<section>
+    <div class="back-button">
+      <button mat-raised-button (click)="navigateTo('/leaderboard/')">Back to Leaderboard</button>
+    </div>
+  </section>
 
 <mat-card class="player-card">
     <mat-card-header class="profile-card-header">
@@ -9,7 +15,7 @@
     <mat-divider></mat-divider>
     <mat-card-content><p></p>
         <div class="profile-card-content">Team: {{ player.team }}</div>
-        <div class="profile-card-content">Height: {{ player.height_feet }}'{{ player.height_inches }}"</div>
+        <div class="profile-card-content">Height: {{ player.height_feet }}'{{ player.height_inches? player.height_inches : 0 }}"</div>
         <div class="profile-card-content"> Weight: {{ player.weight }} lbs</div>
         <div class="profile-card-content"> Birthdate: {{ player.birth_date }}</div>
         <div class="profile-card-content">Position: {{ player.primary_position }}</div>
@@ -98,7 +104,7 @@
 
                  <!--Sacrifices column-->
                  <ng-container matColumnDef="sacrifices">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>S</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SAC</th>
                     <td mat-cell *matCellDef="let player">{{ player.sacrifices }}</td>
                 </ng-container>
 
@@ -215,7 +221,7 @@
 
                 <!--Total batters faced column-->
                 <ng-container matColumnDef="total_batters_faced">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Batters Faced</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>TBF</th>
                     <td mat-cell *matCellDef="let season">{{ season.total_batters_faced }}</td>
                 </ng-container>
 
@@ -281,3 +287,20 @@
         </mat-card-content>
     </div>
 </mat-card> 
+
+<div class="chart-card-container">
+    <mat-card class="line-chart-card1">
+        <mat-card-header class="stat-card-header">
+            <mat-card-title class="card-title">Batting Trends</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <canvas id="lineChart"></canvas>
+    </mat-card>
+    <mat-card class="line-chart-card2">
+        <mat-card-header class="stat-card-header">
+            <mat-card-title class="card-title">Placeholder...</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <canvas id="lineChart"></canvas>
+    </mat-card>
+</div>
