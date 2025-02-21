@@ -42,6 +42,10 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
   battingYears: number[] = [];
   battingAvgs: number[] = [];
   sluggingPercentages: number[] = [];
+  singles: number[] = [];
+  doubles: number[] = [];
+  triples: number[] = [];
+  homeruns: number[] = [];
 
   constructor(private route: ActivatedRoute, private statsService: StatsService, private router: Router) {}
 
@@ -56,7 +60,7 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
       Chart.register(...registerables); 
-      this.loadLineChart();
+      this.loadLineCharts();
   }
 
   loadPlayerData(playerId: number): void {
@@ -85,18 +89,24 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
     this.router.navigate([route]);
   }
 
-  loadLineChart(): void {
+  loadLineCharts(): void {
     // sort batting stats oldest to newest and set data
     this.battingStats.sort((a, b) => a.year - b.year);
     this.battingYears = this.battingStats.map(stat => stat.year);
     this.battingAvgs = this.battingStats.map(stat => stat.avg);
     this.sluggingPercentages = this.battingStats.map(stat => stat.slg);
 
+    this.singles = this.battingStats.map(stat => stat.hits);
+    this.doubles = this.battingStats.map(stat => stat.doubles);
+    this.triples = this.battingStats.map(stat => stat.triples);
+    this.homeruns = this.battingStats.map(stat => stat.home_runs);
+
     // debugging
     console.log('batting stats years:', this.battingYears);      
     console.log('batting averages:', this.battingAvgs);  
     console.log('slugging percentages:', this.sluggingPercentages);  
 
+    // line chart for batting average and slugging percentage 
     new Chart("lineChart", {
       type: 'line', 
       data: {
@@ -125,6 +135,55 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
             beginAtZero: false,
             type: 'linear'
           }
+        }
+      }
+    })
+
+    // line chart for hits, doubles, triples, and home runs
+    new Chart("lineChart2", {
+      type: 'line', 
+      data: {
+        labels: this.battingYears, 
+        datasets: [
+          {
+            label: 'Hits', 
+            data: this.singles,
+            borderColor: 'blue', 
+            backgroundColor: 'rgba(0, 0, 255, 0.3)',
+            borderWidth: 2, 
+            fill: true
+          }, 
+          {
+            label: 'Doubles', 
+            data: this.doubles,
+            borderColor: 'red', 
+            backgroundColor: 'rgba(255, 0, 0, 0.3)',
+            borderWidth: 2, 
+            fill: true
+          }, 
+          {
+            label: 'Triples', 
+            data: this.triples,
+            borderColor: 'orange',
+            backgroundColor: 'rgba(255, 165, 0, 0.3)',
+            borderWidth: 2, 
+            fill: true
+          }, 
+          {
+            label: 'Home Runs', 
+            data: this.homeruns,
+            borderColor: 'green', 
+            backgroundColor: 'rgba(0, 255, 0, 0.3)',
+            borderWidth: 2, 
+            fill: true
+          }
+        ]
+      }, 
+      options: {
+        responsive: true, 
+        scales: {
+          x: { stacked: true }, 
+          y: { stacked: false }
         }
       }
     })

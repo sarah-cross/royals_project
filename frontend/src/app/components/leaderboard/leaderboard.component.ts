@@ -93,7 +93,6 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
     if (this.selectedStatType === 'batting') {
       this.statsService.getBattingLeaderboard(this.selectedYear).subscribe(data => {
         this.dataSource.data = data;
-        
       });
     }
     // get pitching leaderboard data
