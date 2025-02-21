@@ -2,7 +2,7 @@
 
 <mat-card class="player-card">
     <mat-card-header>
-        <mat-card-title class="card-title">{{ player.name_use }} {{ player.name_last }}</mat-card-title>
+        <mat-card-title class="card-title">{{ player.name_use || player.name_first }} {{ player.name_last }}</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
@@ -15,3 +15,239 @@
         <div class="card-content">Throws: {{ player.throws }}</div>
     </mat-card-content> 
 </mat-card>
+
+<div *ngIf="battingStats!.length > 0">
+    <table mat-table [dataSource]="battingStats">
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let season">{{ season.year }}</td>
+        </ng-container>
+        <!--Team column-->
+        <ng-container matColumnDef="org_abbreviation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Team</th>
+            <td mat-cell *matCellDef="let season">{{ season.org_abbreviation }}</td>
+        </ng-container>
+
+        <!--League column-->
+        <ng-container matColumnDef="league">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>League</th>
+            <td mat-cell *matCellDef="let season">{{ season.league }}</td>
+        </ng-container>
+
+        <!--Games column-->
+        <ng-container matColumnDef="games">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>G</th>
+            <td mat-cell *matCellDef="let season">{{ season.games }}</td>
+        </ng-container>
+
+        <!--At Bats column-->
+        <ng-container matColumnDef="at_bats">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>AB</th>
+            <td mat-cell *matCellDef="let season">{{ season.at_bats }}</td>
+        </ng-container>
+
+        <!--Runs column-->
+        <ng-container matColumnDef="runs">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>R</th>
+            <td mat-cell *matCellDef="let season">{{ season.runs }}</td>
+        </ng-container>
+
+        <!--Hits column-->
+        <ng-container matColumnDef="hits">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>H</th>
+            <td mat-cell *matCellDef="let season">{{ season.hits }}</td>
+        </ng-container>
+
+        <!--Doubles column-->
+        <ng-container matColumnDef="doubles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>2B</th>
+            <td mat-cell *matCellDef="let season">{{ season.doubles }}</td>
+        </ng-container>
+
+        <!--Triples column-->
+        <ng-container matColumnDef="triples">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>3B</th>
+            <td mat-cell *matCellDef="let season">{{ season.triples }}</td>
+        </ng-container>
+
+        <!--Home runs column-->
+        <ng-container matColumnDef="home_runs">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>HR</th>
+            <td mat-cell *matCellDef="let season">{{ season.home_runs }}</td>
+        </ng-container>
+
+        <!--Bases on balls column-->
+        <ng-container matColumnDef="bases_on_balls">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>BB</th>
+            <td mat-cell *matCellDef="let season">{{ season.bases_on_balls }}</td>
+        </ng-container>
+
+        <!--Strikeouts column-->
+        <ng-container matColumnDef="strikeouts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SO</th>
+            <td mat-cell *matCellDef="let season">{{ season.strikeouts }}</td>
+        </ng-container>
+
+        <!--Stolen bases column-->
+        <ng-container matColumnDef="stolen_bases">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SB</th>
+            <td mat-cell *matCellDef="let season">{{ season.stolen_bases }}</td>
+        </ng-container>
+
+        <!--Caught stealing column-->
+        <ng-container matColumnDef="caught_stealing">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>CS</th>
+            <td mat-cell *matCellDef="let season">{{ season.caught_stealing }}</td>
+        </ng-container>
+
+        <!--Batting average column-->
+        <ng-container matColumnDef="avg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>AVG</th>
+            <td mat-cell *matCellDef="let season">{{ season.avg }}</td>
+        </ng-container>
+
+        <!--Slugging percentage column-->
+        <ng-container matColumnDef="slg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SLG</th>
+            <td mat-cell *matCellDef="let season">{{ season.slg }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="battingColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: battingColumns;"></tr>
+    </table>
+</div>
+
+
+
+<div *ngIf="pitchingStats!.length > 0">
+    <table mat-table [dataSource]="pitchingStats">
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let season">{{ season.year }}</td>
+        </ng-container>
+        <!--Team column-->
+        <ng-container matColumnDef="org_abbreviation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Team</th>
+            <td mat-cell *matCellDef="let season">{{ season.org_abbreviation }}</td>
+        </ng-container>
+
+        <!--League column-->
+        <ng-container matColumnDef="league">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>League</th>
+            <td mat-cell *matCellDef="let season">{{ season.league }}</td>
+        </ng-container>
+
+        <!--Games column-->
+        <ng-container matColumnDef="games">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>G</th>
+            <td mat-cell *matCellDef="let season">{{ season.games }}</td>
+        </ng-container>
+
+        <!--Games started column-->
+        <ng-container matColumnDef="games_started">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>GS</th>
+            <td mat-cell *matCellDef="let season">{{ season.games_started }}</td>
+        </ng-container>
+
+        <!--Complete games column-->
+        <ng-container matColumnDef="complete_games">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>CG</th>
+            <td mat-cell *matCellDef="let season">{{ season.complete_games }}</td>
+        </ng-container>
+
+        <!--Games finished column-->
+        <ng-container matColumnDef="games_finished">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>GF</th>
+            <td mat-cell *matCellDef="let season">{{ season.games_finished }}</td>
+        </ng-container>
+
+        <!--Innings pitched column-->
+        <ng-container matColumnDef="innings_pitched">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>IP</th>
+            <td mat-cell *matCellDef="let season">{{ season.innings_pitched }}</td>
+        </ng-container>
+
+        <!--Wins column-->
+        <ng-container matColumnDef="wins">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>W</th>
+            <td mat-cell *matCellDef="let season">{{ season.wins }}</td>
+        </ng-container>
+
+        <!--Losses column-->
+        <ng-container matColumnDef="losses">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>L</th>
+            <td mat-cell *matCellDef="let season">{{ season.losses }}</td>
+        </ng-container>
+
+        <!--Saves column-->
+        <ng-container matColumnDef="saves">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SV</th>
+            <td mat-cell *matCellDef="let season">{{ season.saves }}</td>
+        </ng-container>
+
+        <!--Total batters faced column-->
+        <ng-container matColumnDef="total_batters_faced">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Batters Faced</th>
+            <td mat-cell *matCellDef="let season">{{ season.total_batters_faced }}</td>
+        </ng-container>
+
+        <!--At Bats column-->
+        <ng-container matColumnDef="at_bats">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>AB</th>
+            <td mat-cell *matCellDef="let season">{{ season.at_bats }}</td>
+        </ng-container>
+
+        <!--Hits column-->
+        <ng-container matColumnDef="hits">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>H</th>
+            <td mat-cell *matCellDef="let season">{{ season.hits }}</td>
+        </ng-container>
+
+        <!--Doubles column-->
+        <ng-container matColumnDef="doubles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>2B</th>
+            <td mat-cell *matCellDef="let season">{{ season.doubles }}</td>
+        </ng-container>
+
+        <!--Triples column-->
+        <ng-container matColumnDef="triples">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>3B</th>
+            <td mat-cell *matCellDef="let season">{{ season.triples }}</td>
+        </ng-container>
+
+        <!--Home runs column-->
+        <ng-container matColumnDef="home_runs">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>HR</th>
+            <td mat-cell *matCellDef="let season">{{ season.home_runs }}</td>
+        </ng-container>
+
+        <!--Bases on balls column-->
+        <ng-container matColumnDef="bases_on_balls">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>BB</th>
+            <td mat-cell *matCellDef="let season">{{ season.bases_on_balls }}</td>
+        </ng-container>
+
+        <!--Strikeouts column-->
+        <ng-container matColumnDef="strikeouts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SO</th>
+            <td mat-cell *matCellDef="let season">{{ season.strikeouts }}</td>
+        </ng-container>
+
+        <!--Whip column-->
+        <ng-container matColumnDef="whip">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>WHIP</th>
+            <td mat-cell *matCellDef="let season">{{ season.whip }}</td>
+        </ng-container>
+
+        <!--Batting average against column-->
+        <ng-container matColumnDef="avg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>AVG</th>
+            <td mat-cell *matCellDef="let season">{{ season.avg }}</td>
+        </ng-container>
+
+        
+
+        <tr mat-header-row *matHeaderRowDef="pitchingColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: pitchingColumns;"></tr>
+    </table>
+</div>
