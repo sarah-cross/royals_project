@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
 
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
     MatInputModule, 
     MatSelectModule,
     MatButtonToggleModule,
+    MatToolbarModule,
     NgFor,
     NgIf,
     RouterModule,
@@ -32,7 +34,7 @@ import { RouterModule } from '@angular/router';
 export class LeaderboardComponent implements OnInit, AfterViewInit {
 
   
-  battingColumns: string[] = ['rank','player', 'org_abbreviation', 'league', 'games', 'at_bats', 'runs', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'stolen_bases', 'caught_stealing', 'avg', 'slg']; 
+  battingColumns: string[] = ['rank','player', 'org_abbreviation', 'league', 'games', 'at_bats', 'runs', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'sacrifices', 'sacrifice_flies', 'stolen_bases', 'caught_stealing', 'avg', 'slg']; 
   pitchingColumns: string[] = ['rank','player', 'org_abbreviation', 'league', 'games', 'games_started', 'complete_games', 'games_finished', 'innings_pitched', 'wins', 'losses', 'saves', 'total_batters_faced', 'at_bats', 'hits', 'doubles', 'triples', 'home_runs', 'bases_on_balls', 'strikeouts', 'whip', 'avg'];
   displayedColumns: string[] = this.battingColumns; // default display batting columns
 

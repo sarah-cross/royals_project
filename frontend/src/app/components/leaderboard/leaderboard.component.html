@@ -1,5 +1,7 @@
 
-<h1 class="header">MLB Statistics</h1>
+<mat-toolbar class="toolbar">
+    <h1 class="header">MLB Statistics</h1>
+</mat-toolbar>
 <div class="leaderboard-container">
     <div class="controls">
         <!--Year selector-->
@@ -104,6 +106,18 @@
                 <ng-container matColumnDef="strikeouts">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>SO</th>
                     <td mat-cell *matCellDef="let player">{{ player.strikeouts }}</td>
+                </ng-container>
+
+                 <!--Sacrifices column-->
+                 <ng-container matColumnDef="sacrifices">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>S</th>
+                    <td mat-cell *matCellDef="let player">{{ player.sacrifices }}</td>
+                </ng-container>
+
+                 <!--Sacrifice flies column-->
+                 <ng-container matColumnDef="sacrifice_flies">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>SF</th>
+                    <td mat-cell *matCellDef="let player">{{ player.sacrifice_flies }}</td>
                 </ng-container>
 
                 <!--Stolen bases column-->

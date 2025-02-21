@@ -1,9 +1,13 @@
 .header {
-  padding: 30px;
-  padding-left: 40px;
-  background-color: #004687;
+  padding-left: 30px;
   color: white;
+  font-size: larger;
 }
+.toolbar {
+  background-color: #004687;
+}
+
+
 .leaderboard-container {
   display: flex;
   flex-direction: column;

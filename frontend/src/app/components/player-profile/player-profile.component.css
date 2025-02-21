@@ -1,25 +1,52 @@
 .header {
-    padding: 30px;
-    padding-left: 40px;
-    background-color: #004687;
+    padding-left: 30px;
     color: white;
+    font-size: larger;
+  }
+  .toolbar {
+    background-color: #004687;
+  }
+  .menu-button {
+    color: white;
+    background-color: #004687;
   }
 
   .player-card {
-    padding: 12px;
     max-width: 300px;
     border-radius: 8px;
     margin: 30px;
+    overflow: hidden;
+  }
+  .stat-card {
+    margin: 30px;
+    overflow-x: auto;
+    border-radius: 8px;
+    padding: 0;
+    position: relative;
   }
 
-
-  mat-divider {
-    width: 100%;
-    margin: 8px 0;
+  .stat-card-header, .profile-card-header {
+    background-color: #004687;
+    color: white;
+    padding-bottom: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
+
   
-  .card-content {
+
+  .profile-card-content {
     padding: 2px 0;
     font-size: 16px;
   }
+
+  .stat-card-content {
+    padding: 0;
+    overflow-x: auto;
+  }
+ 
+  
+
+  
   
