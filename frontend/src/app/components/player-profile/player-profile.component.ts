@@ -168,42 +168,40 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
             label: 'Singles', 
             data: this.singles,
             borderColor: 'blue', 
-            backgroundColor: 'rgba(0, 0, 255, 0.1)',
             borderWidth: 2, 
-            fill: true, 
+            fill: false, 
           }, 
           {
             label: 'Doubles', 
             data: this.doubles,
             borderColor: 'orange',
-            backgroundColor: 'rgba(255, 165, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }, 
           {
             label: 'Triples', 
             data: this.triples,
             borderColor: 'red', 
-            backgroundColor: 'rgba(255, 0, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }, 
           {
             label: 'Home Runs', 
             data: this.homeruns,
             borderColor: 'green', 
-            backgroundColor: 'rgba(0, 255, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }
         ]
       }, 
       options: {
         responsive: true, 
         scales: {
-          x: { stacked: true }, 
-          y: { stacked: false }
-        },
+          y: {
+            beginAtZero: false,
+            type: 'linear'
+          }
+        }, 
       }
     })
 
@@ -312,42 +310,40 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
             label: 'Singles', 
             data: this.singlesAllowed,
             borderColor: 'blue', 
-            backgroundColor: 'rgba(0, 0, 255, 0.1)',
             borderWidth: 2, 
-            fill: true, 
+            fill: false, 
           }, 
           {
             label: 'Doubles', 
             data: this.doublesAllowed,
             borderColor: 'orange',
-            backgroundColor: 'rgba(255, 165, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }, 
           {
             label: 'Triples', 
             data: this.triplesAllowed,
             borderColor: 'red', 
-            backgroundColor: 'rgba(255, 0, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }, 
           {
             label: 'Home Runs', 
             data: this.homerunsAllowed,
             borderColor: 'green', 
-            backgroundColor: 'rgba(0, 255, 0, 0.1)',
             borderWidth: 2, 
-            fill: true
+            fill: false
           }
         ]
       }, 
       options: {
         responsive: true, 
         scales: {
-          x: { stacked: true }, 
-          y: { stacked: false }
-        },
+          y: {
+            beginAtZero: false,
+            type: 'linear'
+          }
+        }, 
       }
     })
 
