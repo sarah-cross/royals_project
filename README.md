@@ -29,3 +29,5 @@ Run Django server: ```python manage.py runserver```<br/>
 Navigate to frontend directory: ```cd frontend```<br/>
 Install dependencies: ```npm install```<br/>
 Start Angular server: ```ng serve```<br/>
+
+[Demo Video](https://drive.google.com/file/d/1EESdV7KHno2bQbo2OEde2KdFJ1ZU2S6F/view?usp=drive_link)
