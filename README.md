@@ -7,7 +7,7 @@ Player profile features: profile information, batting/pitching stats over career
 Django: 5.1.5<br/>
 Python 3.11.6<br/>
 Django REST Framework: 3.15.2 <br/>
-DORS Headers for API access from Angular <br/>
+CORS Headers for API access from Angular <br/>
 JWT Authentication <br/>
 
 **Frontend:** <br/>
