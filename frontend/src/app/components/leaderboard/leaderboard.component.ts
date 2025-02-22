@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
 
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
     MatSelectModule,
     MatButtonToggleModule,
     MatToolbarModule,
+    MatTooltipModule,
     NgFor,
     NgIf,
     RouterModule,
