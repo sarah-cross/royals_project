@@ -12,12 +12,11 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-
 }
 
 .table-container {
   overflow-x: auto;
-
+  position: relative;
 }
 
 .controls {
@@ -62,4 +61,12 @@
 
 td, th {
   width: 20%;
+}
+
+.search {
+  position: sticky;
+}
+.paginator {
+  position: sticky;
+  background-color: white;
 }

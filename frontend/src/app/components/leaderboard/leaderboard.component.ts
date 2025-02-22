@@ -91,18 +91,21 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
   }
   
   loadLeaderboard(year?: number): void {
-    // get batting leaderboard data
+    // get batting leaderboard data and set sort to home runs descending
     if (this.selectedStatType === 'batting') {
       this.statsService.getBattingLeaderboard(this.selectedYear).subscribe(data => {
         this.dataSource.data = data;
+        this.sort.sort({ id: 'home_runs', start: 'desc', disableClear: false });
       });
     }
-    // get pitching leaderboard data
+    // get pitching leaderboard data and set sort to strikeouts descending
     else if (this.selectedStatType === 'pitching') {
       this.statsService.getPitchingLeaderboard(this.selectedYear).subscribe(data => {
         this.dataSource.data = data;
+        this.sort.sort({ id: 'strikeouts', start: 'desc', disableClear: false });
       });
     }
+    this.dataSource.sort = this.sort;
   }
 
 }

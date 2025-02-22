@@ -18,15 +18,15 @@
         </mat-button-toggle-group>
     </div>
 
-    <div class="table-container">
-        <!--Search field-->
-        <mat-form-field>
-            <mat-label>Search for a player</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bobby Witt, Jr." #input>
-        </mat-form-field>
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!--Search field-->
+    <mat-form-field class="search">
+        <mat-label>Search for a player</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Bobby Witt, Jr." #input>
+    </mat-form-field>
 
-            <!--BATTING TABLE-->
+    <!--BATTING TABLE-->
+    <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container *ngIf="selectedStatType === 'batting'">
                 <!--Rank Column-->
                 <ng-container matColumnDef="rank">
@@ -287,7 +287,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-        <!--Pagination-->
-        <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
     </div>
+    <!--Pagination-->
+    <mat-paginator class="paginator" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
 </div>

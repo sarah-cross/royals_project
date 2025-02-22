@@ -122,6 +122,7 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
     // set data for base stealing
     this.stolenBasePercentage = this.battingStats.map(stat => (stat.stolen_bases / (stat.stolen_bases + stat.caught_stealing) * 100));
 
+
     // BATTING CHART 1 
     // line chart for batting average and slugging percentage 
     new Chart("battingLineChart", {
@@ -250,12 +251,9 @@ export class PlayerProfileComponent implements OnInit, AfterViewInit {
   }
 
   loadPitchingLineCharts(): void {
-    // sort pitching stats oldest to newest and set data
+    // sort pitching stats oldest to newest and set data for whip and batting avg against
     this.pitchingStats.sort((a, b) => a.year - b.year);
     this.pitchingYears = this.pitchingStats.map(stat => stat.year);
-    console.log('pitching years:', this.pitchingYears);
-
-    // set data for whip and batting average against
     this.whip = this.pitchingStats.map(stat => stat.whip);
     this.battingAverageAgainst = this.pitchingStats.map(stat => stat.avg);
 
